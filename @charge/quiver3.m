@@ -6,6 +6,7 @@ function hand = quiver3(Q, x, y, z, varargin)
 num = length(x);
 
 % E-Field Calculation
+[u, v, w] = EField(Q, x, y, z);
 
 % 
 hand = quiver3(x, y, z, u, v, w, varargin{:});
