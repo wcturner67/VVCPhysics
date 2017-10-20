@@ -5,7 +5,7 @@ function hand = quiver3(Q, x, y, z, varargin)
 % Input validation
 num = length(x);
 
-% 
+% E-Field Calculation
 
 % 
 hand = quiver3(x, y, z, u, v, w, varargin{:});

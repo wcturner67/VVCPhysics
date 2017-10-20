@@ -4,16 +4,17 @@ function [u, v, w] = EField(Q, x, y, z)
 
 
 % Input validation
-num = length(x);
+dim = size(x);
 if nargin == 3
-    z = zeros(1, num);
+    z = zeros(dim);
 end
-if any(num ~= [length(y), length(z)])
+inSz = dim ~= [size(y); size(z)];
+if any(inSz(:))
     error('Input length mismatch')
 end
 
 % Field calculation
-r = sqrt((x-Q.x)^2+(y-Q.y)^2+(z-Q.z)^2);
+r = sqrt((x-Q.x).^2+(y-Q.y).^2+(z-Q.z).^2);
 u = 8.99e9*Q.mag*(x-Q.x)./r.^3;
 if nargout >= 2
     v = 8.99e9*Q.mag*(y-Q.y)./r.^3;
