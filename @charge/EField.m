@@ -14,12 +14,13 @@ if any(inSz(:))
 end
 
 % Field calculation
+k = 8.987551787368e9;
 r = sqrt((x-Q.x).^2+(y-Q.y).^2+(z-Q.z).^2);
-u = 8.99e9*Q.mag*(x-Q.x)./r.^3;
+u = k*Q.mag*(x-Q.x)./r.^3;
 if nargout >= 2
-    v = 8.99e9*Q.mag*(y-Q.y)./r.^3;
+    v = k*Q.mag*(y-Q.y)./r.^3;
 end
 if nargout == 3
-    w = 8.99e9*Q.mag*(z-Q.z)./r.^3;
+    w = k*Q.mag*(z-Q.z)./r.^3;
 end
 end
