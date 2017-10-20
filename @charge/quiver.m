@@ -25,7 +25,7 @@ line([pos.x], [pos.y], 'Color', 'g', 'Marker', '+', 'LineStyle', 'none')
 
 % Add negative charges
 neg = Q([Q.mag] < 0);
-line([neg.x], [neg.y], 'Color', 'r', 'Marker', 'x', 'LineStyle', 'none')
+line([neg.x], [neg.y], 'Color', 'r', 'Marker', 'o', 'LineStyle', 'none')
 hold off
 
 % Clear handle if not requested
