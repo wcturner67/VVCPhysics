@@ -1,0 +1,1 @@
+@charge is a class that is meant to provoide some simplified plotting functions related to point charges

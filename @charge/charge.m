@@ -36,13 +36,15 @@ classdef charge
         % quiver overload
         hand = quiver(charge, x, y, varargin)
 
-        % Electric-field calculator
-        [u, v, w] = EField(Q, x, y, z)
-        
         % quiver3 overload
         hand = quiver3(charge, x, y, z, varargin)
 
         % contour overload
         [cout, hand] = contour(Q, x, y, varargin)
+    end
+    
+    methods (Access = private)
+        % Electric-field calculator
+        [u, v, w] = EField(Q, x, y, z)
     end
 end
