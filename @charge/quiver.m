@@ -19,14 +19,19 @@ end
 hand = quiver(x, y, u, v, varargin{:});
 
 % Add positive charges
-hold on
+holding = ishold;
+if ~holding
+    hold on
+end
 pos = Q([Q.mag] > 0);
 line([pos.x], [pos.y], 'Color', 'g', 'Marker', '+', 'LineStyle', 'none')
 
 % Add negative charges
 neg = Q([Q.mag] < 0);
 line([neg.x], [neg.y], 'Color', 'r', 'Marker', 'o', 'LineStyle', 'none')
-hold off
+if ~holding
+    hold off
+end
 
 % Clear handle if not requested
 if nargout == 0
