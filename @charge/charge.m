@@ -14,7 +14,7 @@ classdef charge
             % All inputs should have SI units and decimation (e.g. 1e-6 to
             % represent micro-coulombs)
             
-            % Input validation
+            % Validate inputs
             num = length(x);
             if nargin == 3
                 z = zeros(1, num);
@@ -23,7 +23,7 @@ classdef charge
                 error('All inputs must be equal length')
             end
             
-            % Object construction
+            % Feed input arguments into output object
             obj(1:num) = obj;
             for k = 1:num
                 obj(k).x = x(k);
@@ -33,13 +33,9 @@ classdef charge
             end
         end
         
-        % quiver overload
+        % Graphing overloads
         hand = quiver(charge, x, y, varargin)
-
-        % quiver3 overload
         hand = quiver3(charge, x, y, z, varargin)
-
-        % contour overload
         [cout, hand] = contour(Q, x, y, varargin)
     end
     
