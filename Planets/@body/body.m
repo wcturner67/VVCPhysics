@@ -1,14 +1,19 @@
 classdef body
-    %%
+    % A class that is meant to serve as the basis for a simple model of
+    % celestial motion.
+    
+    %% General properties
     properties
         mass(1, 1) double
     end
-    %%
+    
+    %% Dependent properties
     properties (Dependent = true)
         pos
         vel
     end
-    %%
+    
+    %% Private properties
     properties (Access = private)
         posX(1, 1) double {mustBeFinite}
         posY(1, 1) double {mustBeFinite}
@@ -18,6 +23,7 @@ classdef body
         velZ(1, 1) double {mustBeFinite}
     end
     
+    %% General methods
     methods
         %% Get methods
         function pos = get.pos(obj)
@@ -44,21 +50,25 @@ classdef body
                 obj.velZ = new(3);
             end
         end
-    end
-    
-    methods
+        
         %% Constructor method
         function obj = body(mass, pos, vel)
-            %
-            %
+            % BODY creates a celestial body object based on initial mass,
+            % position, and velocity data.
+            % 
+            % Mass must be a scalar or N-length vector, pos and vel should
+            % be N x 3 matrices
             
             % Input validation
-            if any(size(pos) ~= size(vel))
+            [numBodies, ~] = size(pos);
+            [numVel, ~] = size(vel);
+            numMass = length(mass);
+            if numVel ~= numMass || any(numBodies ~= [numVel numMass])
                 error('Input size mismatch')
             end
             
             % Move input data into output object
-            [numBodies, ~] = size(pos);
+            
             obj(numBodies) = obj;
             for k = 1:numBodies
                 % Masses
@@ -71,10 +81,9 @@ classdef body
                 obj(k).vel = vel(k, :);
             end
         end
-        
-        %%
     end
     
+    %% Private methods
     methods (Access = private)
         body = posUpdate(body)
     end
