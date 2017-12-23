@@ -24,7 +24,7 @@ classdef body
             numBodies = size(pos, 1);
             numVel = size(vel, 1);
             numMass = length(mass);
-            if numVel ~= numMass || any(numBodies ~= [numVel numMass])
+            if any(numBodies ~= [numVel numMass])
                 error('Input size mismatch')
             end
             
@@ -51,7 +51,7 @@ classdef body
         posM = getPos(body)
         velM = getVel(body)
         
-        %% Update methods
+        %% Update method
         obj = update(obj)
     end
 end

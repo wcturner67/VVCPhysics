@@ -10,7 +10,7 @@ classdef cartesian
         function obj = cartesian(x, y, z)
             % Input validation
             numX = length(x); numY = length(y); numZ = length(z);
-            if any(numX ~= [numY numZ]) || numY ~= numZ
+            if any(numX ~= [numY numZ])
                 error('Input length mismatch')
             end
             
