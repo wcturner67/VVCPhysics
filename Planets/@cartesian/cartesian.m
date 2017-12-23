@@ -14,11 +14,16 @@ classdef cartesian
                 error('Input length mismatch')
             end
             
-            for k = numX:-1:1
-                obj(k).x = x;
-                obj(k).y = y;
-                obj(k).z = z;
+            obj(1:numX) = obj;
+            for k = 1:numX
+                obj(k).x = x(k);
+                obj(k).y = y(k);
+                obj(k).z = z(k);
             end
+        end
+        
+        function vec = vector(obj)
+            vec = [obj.x, obj.y, obj.z];
         end
     end
 end

@@ -5,6 +5,7 @@ classdef body
     %% General properties
     properties
         mass(1, 1) double
+        rad(1, 1) double
         pos cartesian
         vel cartesian
     end
@@ -12,7 +13,7 @@ classdef body
     %% General methods
     methods
         %% Constructor method
-        function obj = body(mass, pos, vel)
+        function obj = body(mass, rad, pos, vel)
             % BODY creates a celestial body object based on initial mass,
             % position, and velocity data.
             % 
@@ -20,31 +21,37 @@ classdef body
             % be N x 3 matrices
             
             % Input validation
-            [numBodies, ~] = size(pos);
-            [numVel, ~] = size(vel);
+            numBodies = size(pos, 1);
+            numVel = size(vel, 1);
             numMass = length(mass);
             if numVel ~= numMass || any(numBodies ~= [numVel numMass])
                 error('Input size mismatch')
             end
             
             % Move input data into output object
-            pos = num2cell(pos); vel = num2cell(vel);
             obj(1:numBodies) = obj;
+            cartPos = cartesian(pos(:, 1), pos(:, 2), pos(:, 3));
+            cartVel = cartesian(vel(:, 1), vel(:, 2), vel(:, 3));
             for k = 1:numBodies
                 % Masses
                 obj(k).mass = mass(k);
                 
+                % Diameters
+                obj(k).rad = rad(k);
+                
                 % Positions
-                obj(k).pos = cartesian(pos{k, :});
+                obj(k).pos = cartPos(k);
                 
                 % Velocities
-                obj(k).vel = cartesian(vel{k, :});
+                obj(k).vel = cartVel(k);
             end
         end
-    end
-    
-    %% Private methods
-    methods (Access = private)
-        body = posUpdate(body)
+        
+        %% Position/velocity matrix get methods
+        posM = getPos(body)
+        velM = getVel(body)
+        
+        %% Update methods
+        obj = update(obj)
     end
 end
